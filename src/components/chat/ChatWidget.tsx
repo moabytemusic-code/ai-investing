@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { blink } from '@/blink/client';
+import OpenAI from 'openai';
+import { retrieveMarketContext } from '@/lib/rag_engine';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -45,11 +47,7 @@ export function ChatWidget() {
       // 1. Fetch relevant context from RAG via server-side Edge Function
       let contextText = '';
       try {
-        const ragResponse = await (blink as any).functions.invoke('rag-search', {
-          method: 'POST',
-          body: { query: userMessage },
-        }) as any;
-        contextText = ragResponse?.contextText || '';
+        contextText = await retrieveMarketContext(userMessage);
       } catch (ragErr) {
         console.warn('RAG search unavailable, continuing without context:', ragErr);
       }
@@ -73,21 +71,26 @@ ${contextText || "No specific internal data found. Use general market expertise 
 Current Context: The user is asking about investing and financial tools.`;
 
       let fullResponse = '';
-      await (blink as any).ai.streamText(
-        {
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            ...messages.map(m => ({ role: m.role, content: m.content })),
-            { role: "user", content: userMessage }
-          ],
-          search: true, // Blend with live web search for very recent ticker data
-          model: 'google/gemini-3-flash' // Using the fastest, most reliable model for RAG
-        },
-        (chunk: string) => {
-          fullResponse += chunk;
-          setStreamingText(prev => prev + chunk);
-        }
-      );
+      const openai = new OpenAI({ 
+        apiKey: (import.meta as any).env.VITE_OPENAI_API_KEY, 
+        dangerouslyAllowBrowser: true 
+      });
+
+      const responseStream = await openai.chat.completions.create({
+        model: 'gpt-4o',
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...messages.map(m => ({ role: m.role as any, content: m.content })),
+          { role: "user", content: userMessage }
+        ],
+        stream: true,
+      });
+
+      for await (const chunk of responseStream) {
+        const text = chunk.choices[0]?.delta?.content || "";
+        fullResponse += text;
+        setStreamingText(prev => prev + text);
+      }
 
       setMessages(prev => [...prev, { role: 'assistant', content: fullResponse }]);
       setStreamingText('');
