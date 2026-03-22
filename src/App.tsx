@@ -4,6 +4,7 @@ import { AffiliatePage } from './pages/AffiliatePage';
 import { BlogPage } from './pages/BlogPage';
 import { BlogPostPage } from './pages/BlogPostPage';
 import { ProfilePage } from './pages/ProfilePage';
+import { LegalPage } from './pages/LegalPage';
 import FreeGuide from './pages/FreeGuide';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -60,7 +61,35 @@ const guideRoute = createRoute({
   component: FreeGuide,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, affiliateRoute, blogRoute, blogPostRoute, profileRoute, guideRoute]);
+const termsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/terms',
+  component: () => <LegalPage title="Terms of Service" />,
+});
+
+const privacyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/privacy',
+  component: () => <LegalPage title="Privacy Policy" />,
+});
+
+const contactRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/contact',
+  component: () => <LegalPage title="Enterprise Contact" />,
+});
+
+const routeTree = rootRoute.addChildren([
+  indexRoute, 
+  affiliateRoute, 
+  blogRoute, 
+  blogPostRoute, 
+  profileRoute, 
+  guideRoute,
+  termsRoute,
+  privacyRoute,
+  contactRoute
+]);
 
 const router = createRouter({ routeTree });
 

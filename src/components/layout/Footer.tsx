@@ -1,4 +1,5 @@
 import { TrendingUp } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
 
 export function Footer() {
   return (
@@ -20,8 +21,8 @@ export function Footer() {
         <div className="flex flex-col gap-6">
           <h4 className="text-white font-black text-sm uppercase tracking-widest">Platform</h4>
           <div className="flex flex-col gap-4 text-gray-500 font-bold text-sm tracking-wide">
-            <a href="/recommendations" className="hover:text-emerald transition-colors">AI Directory</a>
-            <a href="/blog" className="hover:text-emerald transition-colors">Market Insights</a>
+            <Link to="/recommendations" className="hover:text-emerald transition-colors">AI Directory</Link>
+            <Link to="/blog" className="hover:text-emerald transition-colors">Market Insights</Link>
             <a href="/#chat" className="hover:text-emerald transition-colors">Ask Engine</a>
           </div>
         </div>
@@ -29,9 +30,9 @@ export function Footer() {
         <div className="flex flex-col gap-6">
           <h4 className="text-white font-black text-sm uppercase tracking-widest">Company</h4>
           <div className="flex flex-col gap-4 text-gray-500 font-bold text-sm tracking-wide">
-            <a href="/terms" className="hover:text-emerald transition-colors">Terms of Service</a>
-            <a href="/privacy" className="hover:text-emerald transition-colors">Privacy Policy</a>
-            <a href="/contact" className="hover:text-emerald transition-colors">Enterprise Contact</a>
+            <Link to="/terms" className="hover:text-emerald transition-colors">Terms of Service</Link>
+            <Link to="/privacy" className="hover:text-emerald transition-colors">Privacy Policy</Link>
+            <Link to="/contact" className="hover:text-emerald transition-colors">Enterprise Contact</Link>
           </div>
         </div>
       </div>

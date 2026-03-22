@@ -77,7 +77,7 @@ Current Context: The user is asking about investing and financial tools.`;
       });
 
       const responseStream = await openai.chat.completions.create({
-        model: 'gpt-4o',
+        model: 'gpt-4o-mini',
         messages: [
           { role: "system", content: SYSTEM_PROMPT },
           ...messages.map(m => ({ role: m.role as any, content: m.content })),
