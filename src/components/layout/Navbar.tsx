@@ -30,8 +30,8 @@ export function Navbar() {
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium">
           <Link to="/" className="text-foreground/80 hover:text-primary transition-colors">Home</Link>
-          <a href="#features" className="text-foreground/80 hover:text-primary transition-colors">Features</a>
-          <a href="#chat" className="text-foreground/80 hover:text-primary transition-colors">Ask AI</a>
+          <a href="/#features" className="text-foreground/80 hover:text-primary transition-colors">Features</a>
+          <a href="/#chat" className="text-foreground/80 hover:text-primary transition-colors">Ask AI</a>
           <Link to="/recommendations" className="text-foreground/80 hover:text-primary transition-colors font-bold text-primary">AI Directory</Link>
           <Link to="/blog" className="text-foreground/80 hover:text-primary transition-colors">Blog</Link>
           <Link to="/guide" className="text-foreground/80 hover:text-primary transition-colors">Free Guide</Link>
