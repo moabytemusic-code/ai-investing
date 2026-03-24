@@ -35,6 +35,7 @@ export function Navbar() {
           <Link to="/recommendations" className="text-foreground/80 hover:text-primary transition-colors font-bold text-primary">AI Directory</Link>
           <Link to="/blog" className="text-foreground/80 hover:text-primary transition-colors">Blog</Link>
           <Link to="/guide" className="text-foreground/80 hover:text-primary transition-colors">Free Guide</Link>
+          <a href="https://www.theaifinancebreakdown.com" target="_blank" rel="noopener noreferrer" className="text-primary font-black uppercase tracking-tighter hover:scale-105 transition-transform">AURUM Breakdown</a>
         </div>
 
         <div className="flex items-center gap-4">

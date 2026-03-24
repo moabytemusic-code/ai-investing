@@ -14,6 +14,7 @@ import { motion } from 'framer-motion';
 import { Hero } from '@/components/sections/Hero';
 import { ChatWidget } from '@/components/chat/ChatWidget';
 import { Button } from '@/components/ui/button';
+import { AurumWidget } from '@/components/sections/AurumWidget';
 
 export function HomePage() {
   return (
@@ -76,7 +77,10 @@ export function HomePage() {
         <ChatWidget />
       </section>
 
-      {/* 5. FINAL CTA */}
+      {/* 5. AURUM BREAKDOWN WIDGET (NEW) */}
+      <AurumWidget />
+
+      {/* 6. FINAL CTA */}
       <section className="py-64 max-w-[1500px] mx-auto px-6">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
